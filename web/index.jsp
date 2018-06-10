@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8" %>
 
-
 <!doctype html>
 <html lang="pl">
 <head>
@@ -12,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="/css/style.css">
 
     <link rel="stylesheet"
           href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -22,7 +22,7 @@
 <body>
 <div class="jumbotron jumbotron-dark text-center">
     <h1>Diminutives Finder</h1>
-    <p>Znajdź zdrobnienia w utworze!</p>
+    <p>Znajdź zdrobnienia w tekście!</p>
 </div>
 
 

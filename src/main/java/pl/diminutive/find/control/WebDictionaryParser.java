@@ -3,7 +3,6 @@ package pl.diminutive.find.control;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -13,10 +12,9 @@ public class WebDictionaryParser {
 
     protected final Logger logger = Logger.getLogger(getClass().getName());
 
-    public boolean hasInformationAboutDiminutiveInDictionary(String word){
+    public boolean hasInformationAboutDiminutiveInDictionary(String word) {
         Elements wikislownikElements = readWikiPageContent(word);
         Elements sjpElements = readSjpPageContent(word);
-
         return hasWordZdrobn(wikislownikElements) || hasWordZdrobnienie(sjpElements) || hasWordZdrobniale(sjpElements);
     }
 
@@ -41,38 +39,34 @@ public class WebDictionaryParser {
         } catch (IOException e) {
             logger.log(Level.WARNING, "Problem while connectiong with wikisłownik online dictionary, caused: " + e.getMessage());
         }
-        if(!Objects.isNull(doc)){
-            return doc.select("body > div")
-                    .attr("id", "mw-content-text")
-                    .select("div")
-                    .attr("class", "mw-parser-output")
-                    .select("dfn")
-                    .attr("class", "lang-pl fldn-3 fldt-znaczenia")
-                    .select("span")
-                    .attr("class", "short-wrapper lang-pl fldn-3 fldt-znaczenia")
-                    .attr("title", "zdrobniale – zdrobniale, zdrobnienie")
-                    .attr("data-expanded", "zdrobniale");
+        if (!Objects.isNull(doc)) {
+            Elements section = doc.select("dl:contains(znaczenia:) ~ *");
+            section.removeAll(doc.select("dl:contains(odmiana:) ~ *"));
+            return section.select("span");
         }
         return null;
     }
 
-    private boolean hasWordZdrobniale( Elements pElements) {
-        if(!Objects.isNull(pElements)){
-            return !pElements.select(":containsOwn(zdrobniale)").isEmpty();
+    private boolean hasWordZdrobniale(Elements pElements) {
+        if (!Objects.isNull(pElements)) {
+            boolean result = !pElements.select(":containsOwn(zdrobniale)").isEmpty();
+            return result;
         }
         return false;
     }
 
-    private boolean hasWordZdrobnienie( Elements pElements) {
-        if(!Objects.isNull(pElements)){
-            return !pElements.select(":containsOwn(zdrobnienie)").isEmpty();
+    private boolean hasWordZdrobnienie(Elements pElements) {
+        if (!Objects.isNull(pElements)) {
+            boolean result = !pElements.select(":containsOwn(zdrobnienie)").isEmpty();
+            return result;
         }
         return false;
     }
 
     private static boolean hasWordZdrobn(Elements pElements) {
-        if(!Objects.isNull(pElements)){
-            return !pElements.select(":containsOwn(zdrobn.)").isEmpty();
+        if (!Objects.isNull(pElements)) {
+            boolean result = !pElements.select(":containsOwn(zdrobn.)").isEmpty();
+            return result;
         }
         return false;
     }
