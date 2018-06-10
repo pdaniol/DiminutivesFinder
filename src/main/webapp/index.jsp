@@ -28,7 +28,7 @@
 
 <div class="row">
     <div class="col-8 offset-2">
-        <form ACTION="http://localhost:2526/test" id="findDimutivesInText" class="input" METHOD="POST"
+        <form ACTION="../test" id="findDimutivesInText" class="input" METHOD="POST"
               accept-charset="UTF-8">
             <div class="form-group">
                 <label for="textForSearch">Wpisz tekst:</label>
